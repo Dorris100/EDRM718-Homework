@@ -1,0 +1,48 @@
+---
+title: "Ruiqin Gao Assignment#7"
+output:
+  html_document:
+    df_print: paged
+---
+The data are reading and writing score for a random sample high school seniors in the nation.
+
+Create a function
+```{r}
+high_residuals<-function(x, y, p)
+{results<-lm(y~x)
+results$residuals<-abs(results$residuals)
+results$residuals<-sort(results$residuals, decreasing=F)
+tenth_largest<-head(tail(results$residuals, p),1)
+ifelse(results$residuals>=tenth_largest, "TRUE", "FALSE")
+}
+```
+
+we will create a scatterplot to show the relationship between two variables.
+```{r echo=TRUE}
+library(here)
+hsb<-read.csv(here("Data","hsb2.csv"))
+hsb
+p<-nrow(hsb)*0.1
+p
+high_residual2<-high_residuals(hsb$write, hsb$read, p)
+high_residual2
+scatter_plot<-plot(hsb$write, hsb$read,
+                   main="Regression for writing on reading", 
+                  xlab="Reading", ylab="Writing",
+                  col=ifelse(high_residual2, "red","black"))
+abline(lm(write~read, data=hsb), col="red")
+```
+
+
+
+
+```
+
+
+
+ 
+
+
+
+
+
