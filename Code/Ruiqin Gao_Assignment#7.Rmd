@@ -24,9 +24,9 @@ hsb<-read.csv(here("Data","hsb2.csv"))
 hsb
 p<-nrow(hsb)*0.1
 p
-high_residual2<-high_residuals(hsb$write, hsb$read, p)
+high_residual2<-high_residuals(hsb$read, hsb$write, p)
 high_residual2
-scatter_plot<-plot(hsb$write, hsb$read,
+scatter_plot<-plot(hsb$read, hsb$write,
                    main="Regression for writing on reading", 
                   xlab="Reading", ylab="Writing",
                   col=ifelse(high_residual2, "red","black"))
